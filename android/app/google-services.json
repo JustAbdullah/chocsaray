@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "321715039959",
+    "project_id": "newchocsaray",
+    "storage_bucket": "newchocsaray.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321715039959:android:1dbd0ce5a070773c65ca92",
+        "android_client_info": {
+          "package_name": "com.store.chocsarayi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVazPpiSwGp2rPYQpcsGztoUDsCieR20M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

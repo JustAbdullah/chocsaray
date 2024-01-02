@@ -1,48 +1,41 @@
-
-
 //newstypes
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../main.dart';
 
-
-
-
-
 //main categories list
 List maincategories = [];
 Future<String> getmaincategoriesSW() async {
   String u;
-  u = url+"api/general-get-maincategories?bid="+bransh;
-  var res = await http
-      .get(Uri.parse(u), headers: {"Accept": "application/json"});
+  u = url + "api/general-get-maincategories?bid=" + bransh;
+  var res =
+      await http.get(Uri.parse(u), headers: {"Accept": "application/json"});
   var resBody = json.decode(res.body);
   maincategories = resBody;
   print(resBody);
-  print (maincategories);
+  print(maincategories);
   return "Sucess";
 }
-Future<List> getmaincategories()async{
+
+Future<List> getmaincategories() async {
   await getmaincategoriesSW();
   return maincategories;
 }
 
-
-
-
-List alloffers =[];
+List alloffers = [];
 Future<String> getalloffersSW() async {
   String u;
-  u = url+"api/general-get-AllOffers?bid="+bransh;
-  var res = await http
-      .get(Uri.parse(u), headers: {"Accept": "application/json"});
+  u = url + "api/general-get-AllOffers?bid=" + bransh;
+  var res =
+      await http.get(Uri.parse(u), headers: {"Accept": "application/json"});
   var resBody = json.decode(res.body);
   alloffers = resBody;
-  print (alloffers);
+  print(alloffers);
   return "Sucess";
 }
-Future<List> getalloffers()async{
+
+Future<List> getalloffers() async {
   await getalloffersSW();
   return alloffers;
 }
@@ -50,88 +43,84 @@ Future<List> getalloffers()async{
 List fetproducts = [];
 Future<String> getfetproductsSW() async {
   String u;
-  u = url+"api/general-getFeaturedProducts?bid="+bransh;
-  var res = await http
-      .get(Uri.parse(u), headers: {"Accept": "application/json"});
+  u = url + "api/general-getFeaturedProducts?bid=" + bransh;
+  var res =
+      await http.get(Uri.parse(u), headers: {"Accept": "application/json"});
   var resBody = json.decode(res.body);
   fetproducts = resBody;
-  print (fetproducts);
+  print(fetproducts);
   return "Sucess";
 }
-Future<List> getfetproducts()async{
+
+Future<List> getfetproducts() async {
   await getfetproductsSW();
   return fetproducts;
 }
 
-
-
-
-
-List searchproducts =[];
+List searchproducts = [];
 Future<String> getsearchproductsSW(String val) async {
   String u;
-  u = url+"api/general-getsearchProducts?bid="+bransh+"&name="+val;
-  var res = await http
-      .get(Uri.parse(u), headers: {"Accept": "application/json"});
+  u = url + "api/general-getsearchProducts?bid=" + bransh + "&name=" + val;
+  var res =
+      await http.get(Uri.parse(u), headers: {"Accept": "application/json"});
   var resBody = json.decode(res.body);
   searchproducts = resBody;
-  print (searchproducts);
+  print(searchproducts);
   return "Sucess";
 }
-Future<List> getsearchproducts(String val)async{
+
+Future<List> getsearchproducts(String val) async {
   await getsearchproductsSW(val);
   return searchproducts;
 }
 
-
-
 List categoryproducts = [];
 Future<String> getcategoryproductsSW(String id) async {
   String u;
-  u = url+"api/general-getCategoryProducts?id="+id;
-  var res = await http
-      .get(Uri.parse(u), headers: {"Accept": "application/json"});
+  u = url + "api/general-getCategoryProducts?id=" + id;
+  var res =
+      await http.get(Uri.parse(u), headers: {"Accept": "application/json"});
   var resBody = json.decode(res.body);
   categoryproducts = resBody;
-  print (categoryproducts);
+  print(categoryproducts);
   return "Sucess";
 }
-Future<List> getcategoryproducts(String id)async{
+
+Future<List> getcategoryproducts(String id) async {
   await getcategoryproductsSW(id);
   return categoryproducts;
 }
 
-
 List myaddresses = [];
 Future<String> getmyaddressesSW(String id) async {
   String u;
-  u = url+"api/general-getMyaddress?id="+id;
-  var res = await http
-      .get(Uri.parse(u), headers: {"Accept": "application/json"});
+  u = url + "api/general-getMyaddress?id=" + id;
+  var res =
+      await http.get(Uri.parse(u), headers: {"Accept": "application/json"});
   var resBody = json.decode(res.body);
   myaddresses = resBody;
-  print (myaddresses);
+  print(myaddresses);
   return "Sucess";
 }
-Future<List> getmyaddresses(String id)async{
+
+Future<List> getmyaddresses(String id) async {
   await getmyaddressesSW(id);
   return myaddresses;
 }
 
-
-
 List myorders = [];
 Future<String> getmyordersSW(String id) async {
   String u;
-  u = url+"api/general-getMyOrders?id="+id;
-  var res = await http
-      .get(Uri.parse(u), headers: {"Accept": "application/json"});
+  u = url + "api/general-getMyOrders?id=" + id;
+  var res =
+      await http.get(Uri.parse(u), headers: {"Accept": "application/json"});
   var resBody = json.decode(res.body);
   myorders = resBody;
-  print (myorders);
+  print(myorders);
   return "Sucess";
 }
-Future<List> getmyorders(String id)async{
+
+Future<List> getmyorders(String id) async {
   await getmyordersSW(id);
   return myorders;
 }
@@ -139,16 +128,17 @@ Future<List> getmyorders(String id)async{
 Map orderdetails = Map();
 Future<String> getorderdetailsSW(String id) async {
   String u;
-  u = url+"api/general-getOrderdetails?oid="+id;
-  var res = await http
-      .get(Uri.parse(u), headers: {"Accept": "application/json"});
+  u = url + "api/general-getOrderdetails?oid=" + id;
+  var res =
+      await http.get(Uri.parse(u), headers: {"Accept": "application/json"});
   var resBody = json.decode(res.body);
   print(resBody);
   orderdetails = resBody;
-  print (myorders);
+  print(myorders);
   return "Sucess";
 }
-Future<Map> getorderdetails(String id)async{
+
+Future<Map> getorderdetails(String id) async {
   await getorderdetailsSW(id);
   return orderdetails;
 }
@@ -156,15 +146,16 @@ Future<Map> getorderdetails(String id)async{
 Map mywallet = Map();
 Future<String> getmywalletSW(String id) async {
   String u;
-  u = url+"api/general-getMyWallet?id="+id;
-  var res = await http
-      .get(Uri.parse(u), headers: {"Accept": "application/json"});
+  u = url + "api/general-getMyWallet?id=" + id;
+  var res =
+      await http.get(Uri.parse(u), headers: {"Accept": "application/json"});
   var resBody = json.decode(res.body);
   mywallet = resBody;
-  print (mywallet);
+  print(mywallet);
   return "Sucess";
 }
-Future<Map> getmywallet(String id)async{
+
+Future<Map> getmywallet(String id) async {
   await getmywalletSW(id);
   return mywallet;
 }
@@ -172,71 +163,67 @@ Future<Map> getmywallet(String id)async{
 Map mypoints = Map();
 Future<String> getmypointsSW(String id) async {
   String u;
-  u = url+"api/general-getMyPoints?id="+id;
-  var res = await http
-      .get(Uri.parse(u), headers: {"Accept": "application/json"});
+  u = url + "api/general-getMyPoints?id=" + id;
+  var res =
+      await http.get(Uri.parse(u), headers: {"Accept": "application/json"});
   var resBody = json.decode(res.body);
   mypoints = resBody;
-  print (mypoints);
+  print(mypoints);
   return "Sucess";
 }
-Future<Map> getmypoints(String id)async{
+
+Future<Map> getmypoints(String id) async {
   await getmypointsSW(id);
   return mypoints;
 }
 
-
-
 List myfavorate = [];
 Future<String> getmyfavorateSW(String id) async {
   String u;
-  u = url+"api/general-getMyFavorates?id="+id;
-  var res = await http
-      .get(Uri.parse(u), headers: {"Accept": "application/json"});
+  u = url + "api/general-getMyFavorates?id=" + id;
+  var res =
+      await http.get(Uri.parse(u), headers: {"Accept": "application/json"});
   var resBody = json.decode(res.body);
   myfavorate = resBody;
-  print (myfavorate);
+  print(myfavorate);
   return "Sucess";
 }
-Future<List> getmyfavorate(String id)async{
+
+Future<List> getmyfavorate(String id) async {
   await getmyfavorateSW(id);
   return myfavorate;
 }
 
-
-
-
-
-
 List myreservations = [];
 Future<String> getmyreservationsSW(String id) async {
   String u;
-  u = url+"api/general-getMyTableRes?id="+id;
-  var res = await http
-      .get(Uri.parse(u), headers: {"Accept": "application/json"});
+  u = url + "api/general-getMyTableRes?id=" + id;
+  var res =
+      await http.get(Uri.parse(u), headers: {"Accept": "application/json"});
   var resBody = json.decode(res.body);
   myreservations = resBody;
-  print (myreservations);
+  print(myreservations);
   return "Sucess";
 }
-Future<List> getmyreservations(String id)async{
+
+Future<List> getmyreservations(String id) async {
   await getmyreservationsSW(id);
   return myreservations;
 }
 
-
-List ourbranches =[];
+List ourbranches = [];
 Future<String> getourbranchesSW() async {
   String u;
-  u = url+"api/general-getaddresses";
-  var res = await http
-      .get(Uri.parse(u), headers: {"Accept": "application/json"});
+  u = url + "api/general-getaddresses";
+  var res =
+      await http.get(Uri.parse(u), headers: {"Accept": "application/json"});
   var resBody = json.decode(res.body);
   ourbranches = resBody;
-  print (ourbranches);
+  print(ourbranches);
   return "Sucess";
 }
-Future<List> getourbranches()async{
+
+Future<List> getourbranches() async {
   await getourbranchesSW();
   return ourbranches;
 }

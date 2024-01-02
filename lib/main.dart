@@ -21,20 +21,20 @@ import 'package:chocsarayi/theme/dark_theme.dart';
 import 'package:chocsarayi/theme/light_theme.dart';
 import 'package:path/path.dart';
 
-String url="https://chocolatesarayi.xyz/public/";
+String url = "https://chocolatesarayi.xyz/public/";
 Database? database;
-String? databasesPath ;
-String? dbpath ;
-List<CartModel> cartproducts=[];
-Map user=new Map();
-String bransh="";
-String bransh_name='';
-String a='';
-void main()async {
+String? databasesPath;
+String? dbpath;
+List<CartModel> cartproducts = [];
+Map user = new Map();
+String bransh = "";
+String bransh_name = '';
+String a = '';
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   try {
     if (Firebase.apps.isEmpty) {
       await Firebase.initializeApp(
@@ -43,71 +43,65 @@ void main()async {
       ).whenComplete(() {
         print("completedAppInitialize");
       });
-
     }
-    a= (await FirebaseMessaging.instance.getToken())!;
-     FirebaseMessaging.instance.subscribeToTopic("all");
+    a = (await FirebaseMessaging.instance.getToken())!;
+    FirebaseMessaging.instance.subscribeToTopic("all");
   } catch (e) {
     print("komaaaaaaaaaai");
     // TODO: handle exception, for example by showing an alert to the user
   }
-
-
 
   await di.init();
   databasesPath = await getDatabasesPath();
   dbpath = join(databasesPath!, 'komai.db');
   database = await openDatabase(dbpath!, version: 1,
       onCreate: (Database db, int version) async {
-        await db.execute(
-            'CREATE TABLE favorates (id INTEGER PRIMARY KEY,cat_id TEXT,desc TEXT, pid TEXT,  name TEXT, price TEXT, img TEXT)');
-      });
+    await db.execute(
+        'CREATE TABLE favorates (id INTEGER PRIMARY KEY,cat_id TEXT,desc TEXT, pid TEXT,  name TEXT, price TEXT, img TEXT)');
+  });
   SharedPreferences prefs = await SharedPreferences.getInstance();
   // bransh=prefs.getString("branch");
   // bransh="3";
 
-  if(bransh==""){
+  if (bransh == "") {
     // var s=await Geolocator.checkPermission();
     // // var e=Geolocator.isLocationServiceEnabled();
     // if(s==LocationPermission.denied||s==LocationPermission.deniedForever) {
     //   Geolocator.requestPermission();
     // }
     //
-    Geolocator.requestPermission().then((value) async{
-      var s=await Geolocator.checkPermission();
-      String lat="36.1901";
-      String long="43.9930";
-      if(s==LocationPermission.always||s==LocationPermission.whileInUse) {
-        Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-        String lat=position.latitude.toString();
-        String long=position.longitude.toString();
+    Geolocator.requestPermission().then((value) async {
+      var s = await Geolocator.checkPermission();
+      String lat = "36.1901";
+      String long = "43.9930";
+      if (s == LocationPermission.always ||
+          s == LocationPermission.whileInUse) {
+        Position position = await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.high);
+        String lat = position.latitude.toString();
+        String long = position.longitude.toString();
       }
 
-      String b=await dogetbranch(lat, long);
-      if(b=="no"){
-        runApp(
-            MultiProvider(
-              providers: [
-                ChangeNotifierProvider(create: (context) => di.sl<ThemeProvider>()),
-                ChangeNotifierProvider(
-                    create: (context) => di.sl<OnBoardingProvider>()),
-
-              ],
-              child: MaterialApp(
-                title: 'Chocolate Sarayi',
-                debugShowCheckedModeBanner: false,
-                theme: light,
-                home:noservicepage(),
-              ),
-            )
-        );
-      }
-
-      else {
+      String b = await dogetbranch(lat, long);
+      if (b == "no") {
+        runApp(MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (context) => di.sl<ThemeProvider>()),
+            ChangeNotifierProvider(
+                create: (context) => di.sl<OnBoardingProvider>()),
+          ],
+          child: MaterialApp(
+            title: 'Chocolate Sarayi',
+            debugShowCheckedModeBanner: false,
+            theme: light,
+            home: noservicepage(),
+          ),
+        ));
+      } else {
         prefs.setString("token", a);
         bransh = b;
         // prefs.setString("branch", b);
-        if(await DBProvider.db.getClient(1)!=null) {
+        if (await DBProvider.db.getClient(1) != null) {
           user = (await DBProvider.db.getClient(1))!;
         }
         runApp(MultiProvider(
@@ -115,16 +109,13 @@ void main()async {
             ChangeNotifierProvider(create: (context) => di.sl<ThemeProvider>()),
             ChangeNotifierProvider(
                 create: (context) => di.sl<OnBoardingProvider>()),
-
           ],
           child: MyApp(),
         ));
       }
     });
-
-  }
-  else {
-    if(await DBProvider.db.getClient(1)!=null) {
+  } else {
+    if (await DBProvider.db.getClient(1) != null) {
       user = (await DBProvider.db.getClient(1))!;
     }
     prefs.setString("token", a);
@@ -147,7 +138,7 @@ class MyApp extends StatelessWidget {
       title: 'Chocolate Sarayi',
       debugShowCheckedModeBanner: false,
       theme: light,
-      home:SplashScreen(),
+      home: SplashScreen(),
     );
   }
 }
@@ -164,7 +155,7 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-   String title;
+  String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();

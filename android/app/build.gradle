@@ -47,7 +47,7 @@ android {
         applicationId "com.store.chocsarayi"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 9
+        versionCode 11
         versionName "chocsarayi Store"
     }
 
@@ -88,10 +88,18 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'androidx.browser:browser:1.5.0'
+    implementation "androidx.browser:browser:1.3.0"
+    implementation 'com.google.android.play:integrity:1.3.0'
+    implementation 'com.google.firebase:firebase-appcheck-safetynet:16.1.2'
     implementation 'com.google.android.gms:play-services-safetynet:17.0.1'
     androidTestImplementation "androidx.test.ext:junit:1.1.3"
     androidTestImplementation "androidx.fragment:fragment-testing:1.4.1"
     androidTestImplementation "androidx.test:core:1.4.0"
+
+    
+    
 
 
 }

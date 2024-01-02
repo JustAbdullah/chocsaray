@@ -18,13 +18,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   FocusNode _emailNumberFocus = FocusNode();
   FocusNode _passwordFocus = FocusNode();
   FocusNode _dobFocus = FocusNode();
-  TextEditingController _emailController =TextEditingController();
-  TextEditingController _passwordController= TextEditingController();
-  TextEditingController _dobController =TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _dobController = TextEditingController();
   GlobalKey<FormState>? _formKeyLogin;
 
   @override
@@ -45,214 +44,246 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-
   final _phoneController = TextEditingController();
   final _codeController = TextEditingController();
 
-  Future<bool> loginUser(String phone, BuildContext context) async{
+  Future<bool> loginUser(String phone, BuildContext context) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
 
     _auth.verifyPhoneNumber(
         phoneNumber: phone,
         timeout: Duration(seconds: 60),
-        verificationCompleted: (AuthCredential credential) async{
-        
-        },
-        verificationFailed: (Exception exception){
+        verificationCompleted: (AuthCredential credential) async {},
+        verificationFailed: (Exception exception) {
           print(exception);
         },
-        codeSent: (String verificationId, int? forceResendingToken){
+        codeSent: (String verificationId, int? forceResendingToken) {
           String email = _emailController.text.trim();
           String password = _passwordController.text.trim();
           String dob = _dobController.text.trim();
-          Navigator.push(context, MaterialPageRoute(builder: (_) => EntercodeScreen(verificationId,email,password,dob)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) =>
+                      EntercodeScreen(verificationId, email, password, dob)));
         },
-        codeAutoRetrievalTimeout: print
-    );
+        codeAutoRetrievalTimeout: print);
+
+    Future.delayed(const Duration(seconds: 70), () async {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (_) =>
+                  EntercodeScreen("889989", "jhhjh", "jkjkj", "hjh")));
+    });
     throw "";
   }
 
-
-
-
-  bool load=false;
+  bool load = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-
-          Padding(
-            padding: const EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE),
-            child: ListView(
-              physics: BouncingScrollPhysics(),
-              children: [
-                //SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Image.asset(
-                    Images.logo,
-                    height: MediaQuery.of(context).size.height / 4.5,
-                    fit: BoxFit.scaleDown,
-                    matchTextDirection: true,
-                  ),
+        body: Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE),
+          child: ListView(
+            physics: BouncingScrollPhysics(),
+            children: [
+              //SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Image.asset(
+                  Images.logo,
+                  height: MediaQuery.of(context).size.height / 4.5,
+                  fit: BoxFit.scaleDown,
+                  matchTextDirection: true,
                 ),
-                // SizedBox(height: 30),
-                Text(
-                  'Welcome',
+              ),
+              // SizedBox(height: 30),
+              Text(
+                'Welcome',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                    color: Theme.of(context).textTheme.bodyLarge!.color,
+                    fontSize: 32),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(Dimensions.PADDING_SIZE_DEFAULT),
+                child: Text(
+                  'Welcome to Chocolate Sarayi',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).textTheme.bodyLarge!.color, fontSize: 32),
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayMedium!
+                      .copyWith(color: ColorResources.getGreyColor(context)),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(Dimensions.PADDING_SIZE_DEFAULT),
+              ),
+              SizedBox(height: 20),
+              Center(
                   child: Text(
-                    'Welcome to Chocolate Sarayi',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorResources.getGreyColor(context)),
-                  ),
-                ),
-                SizedBox(height: 20),
-                Center(
-                    child: Text(
-                      'تسجيل الدخول',
-                      style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 24, color: ColorResources.getGreyBunkerColor(context)),
-                    )),
-                SizedBox(height: 35),
-                Text(
-                  'رقم الموبايل',
-                  style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorResources.getHintColor(context)),
-                ),
-                SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-                CustomTextField(
-                  hintText: '00000000',
-                  isShowBorder: true,
-                  controller: _emailController,
-                ),
-                SizedBox(height: 20),
-                Text(
-                  'الاسم',
-                  style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorResources.getHintColor(context)),
-                ),
-                SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-                CustomTextField(
-                  isShowBorder: true,
-                  controller: _passwordController,
-                ),
-                SizedBox(height: 20),
-                Text(
-                  'المواليد',
-                  style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorResources.getHintColor(context)),
-                ),
-                SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-                GestureDetector(child:CustomTextField(
+                'تسجيل الدخول',
+                style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                    fontSize: 24,
+                    color: ColorResources.getGreyBunkerColor(context)),
+              )),
+              SizedBox(height: 35),
+              Text(
+                'رقم الموبايل',
+                style: Theme.of(context)
+                    .textTheme
+                    .displayMedium!
+                    .copyWith(color: ColorResources.getHintColor(context)),
+              ),
+              SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+              CustomTextField(
+                hintText: '00000000',
+                isShowBorder: true,
+                controller: _emailController,
+              ),
+              SizedBox(height: 20),
+              Text(
+                'الاسم',
+                style: Theme.of(context)
+                    .textTheme
+                    .displayMedium!
+                    .copyWith(color: ColorResources.getHintColor(context)),
+              ),
+              SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+              CustomTextField(
+                isShowBorder: true,
+                controller: _passwordController,
+              ),
+              SizedBox(height: 20),
+              Text(
+                'المواليد',
+                style: Theme.of(context)
+                    .textTheme
+                    .displayMedium!
+                    .copyWith(color: ColorResources.getHintColor(context)),
+              ),
+              SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+              GestureDetector(
+                child: CustomTextField(
                   isShowBorder: true,
                   isEnabled: false,
                   controller: _dobController,
                 ),
-                  onTap: (){
-                    DatePicker.showDatePicker(context, showTitleActions: true,
-                        onChanged: (date) {
-                          print('change $date in time zone ' +
-                              date.timeZoneOffset.inHours.toString());
-                          _dobController.text=date.year.toString()+"/"+date.month.toString()+"/"+date.day.toString();
-                        }, onConfirm: (date) {
-                          print('confirm $date');
-                          _dobController.text=date.year.toString()+"/"+date.month.toString()+"/"+date.day.toString();
-                        }, currentTime: DateTime.now());
-                  },
-                ),
-                SizedBox(height: 22),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox.shrink(),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        "",
-                        style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                          fontSize: Dimensions.FONT_SIZE_SMALL,
-                          color: ColorResources.getPrimaryColor(context),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                onTap: () {
+                  DatePicker.showDatePicker(context, showTitleActions: true,
+                      onChanged: (date) {
+                    print('change $date in time zone ' +
+                        date.timeZoneOffset.inHours.toString());
+                    _dobController.text = date.year.toString() +
+                        "/" +
+                        date.month.toString() +
+                        "/" +
+                        date.day.toString();
+                  }, onConfirm: (date) {
+                    print('confirm $date');
+                    _dobController.text = date.year.toString() +
+                        "/" +
+                        date.month.toString() +
+                        "/" +
+                        date.day.toString();
+                  }, currentTime: DateTime.now());
+                },
+              ),
+              SizedBox(height: 22),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox.shrink(),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      "",
+                      style:
+                          Theme.of(context).textTheme.displayMedium!.copyWith(
+                                fontSize: Dimensions.FONT_SIZE_SMALL,
+                                color: ColorResources.getPrimaryColor(context),
+                              ),
+                    ),
+                  )
+                ],
+              ),
 
-                // for login button
-                SizedBox(height: 10),
-                CustomButton(
-                  btnTxt: 'دخول',
-                  onTap: () async {
-                    String _email = _emailController.text.trim();
-                    String _password = _passwordController.text.trim();
-                    String _dob ="0";
-                    if (_email.isEmpty) {
-                      showCustomSnackBar('الرجاء ادخال رقم الموبايل', context);
+              // for login button
+              SizedBox(height: 10),
+              CustomButton(
+                btnTxt: 'دخول',
+                onTap: () async {
+                  String _email = _emailController.text.trim();
+                  String _password = _passwordController.text.trim();
+                  String _dob = "0";
+                  if (_email.isEmpty) {
+                    showCustomSnackBar('الرجاء ادخال رقم الموبايل', context);
+                  } else if (_password.isEmpty) {
+                    showCustomSnackBar('الرجاء ادخال الاسم', context);
+                  } else {
+                    if (_dobController.text != null &&
+                        _dobController.text != "") {
+                      _dob = _dobController.text;
                     }
-                    else if (_password.isEmpty) {
-                      showCustomSnackBar('الرجاء ادخال الاسم', context);
+                    // douserlogin(_email,_password,_dob,context);
+                    if (_email == "07517584199") {
+                      douserlogin(_email, _password, _dob, context);
+                    } else {
+                      String mobile = _email.toString();
+                      mobile = '+964$mobile';
+                      print(mobile);
+                      setState(() {
+                        load = true;
+                        loginUser(mobile, context);
+                      });
                     }
 
-                    else {
-                      if(_dobController.text!=null&&_dobController.text!=""){
-                        _dob=_dobController.text;
-                      }
-                      // douserlogin(_email,_password,_dob,context);
-                      if(_email=="07517584199"){
-                        douserlogin(_email,_password,_dob,context);
-                      }
-                      else{
-                        FirebaseAuth _auth = FirebaseAuth.instance;
-                        String mobile=_email.replaceFirst("0", '');
-                        mobile="+964"+mobile;
-                        print(mobile);
-                        setState(() {
-                          load=true;
-                          loginUser(mobile, context);
-                        });
-                      }
+                    // _auth.verifyPhoneNumber(
+                    //     phoneNumber: mobile,
+                    //     timeout: Duration(seconds: 60),
+                    //     verificationCompleted: null,
+                    //     verificationFailed: null,
+                    //     codeSent: null,
+                    //     codeAutoRetrievalTimeout: null
+                    // );
+                  }
+                },
+              ),
 
-
-                      // _auth.verifyPhoneNumber(
-                      //     phoneNumber: mobile,
-                      //     timeout: Duration(seconds: 60),
-                      //     verificationCompleted: null,
-                      //     verificationFailed: null,
-                      //     codeSent: null,
-                      //     codeAutoRetrievalTimeout: null
-                      // );
-
-                    }
-                  },
-                ),
-
-                // for create an account
-                SizedBox(height: 20),
-              ],
-            ),
+              // for create an account
+              SizedBox(height: 20),
+            ],
           ),
-          Positioned(
-            top: 30,
-            right: 30,
-            child:   Container(
-              height: 50, width: 50,
-              decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: ColorResources.COLOR_PRIMARY, width: 2)),
-              child:IconButton(icon: Icon(Icons.arrow_forward_outlined,size: 26,color: ColorResources.COLOR_PRIMARY,),onPressed: (){
-                Navigator.pop(context);
-              },)
-          ),),
-          if(load)
-            loading(),
-        ],
-      )
-    );
+        ),
+        Positioned(
+          top: 30,
+          right: 30,
+          child: Container(
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                      color: ColorResources.COLOR_PRIMARY, width: 2)),
+              child: IconButton(
+                icon: Icon(
+                  Icons.arrow_forward_outlined,
+                  size: 26,
+                  color: ColorResources.COLOR_PRIMARY,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )),
+        ),
+        if (load) loading(),
+      ],
+    ));
   }
 
-  Widget loading(){
-    return
-   new Container(
+  Widget loading() {
+    return new Container(
       child: new Stack(
         children: <Widget>[
           new Container(
@@ -263,8 +294,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: new Container(
               decoration: new BoxDecoration(
                   color: Colors.grey.withOpacity(0.4),
-                  borderRadius: new BorderRadius.circular(10.0)
-              ),
+                  borderRadius: new BorderRadius.circular(10.0)),
               width: 300.0,
               height: 200.0,
               alignment: AlignmentDirectional.center,
@@ -288,9 +318,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: new Center(
                       child: new Text(
                         "Please wait...",
-                        style: new TextStyle(
-                            color: Colors.brown
-                        ),
+                        style: new TextStyle(color: Colors.brown),
                       ),
                     ),
                   ),
@@ -301,8 +329,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
-
-
   }
-
 }

@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAVazPpiSwGp2rPYQpcsGztoUDsCieR20M',
-    appId: '1:321715039959:android:1dbd0ce5a070773c65ca92',
-    messagingSenderId: '321715039959',
-    projectId: 'newchocsaray',
-    storageBucket: 'newchocsaray.appspot.com',
+    apiKey: 'AIzaSyDpjHCl1m3q8Wn6CAycV-MoTTRqJD049vI',
+    appId: '1:203935841714:android:360ff13c6ac4ee1bbc38ab',
+    messagingSenderId: '203935841714',
+    projectId: 'choc-a04a0',
+    storageBucket: 'choc-a04a0.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDsqluZCcXsmv1fsUYqj3vKeWqfGnlD-iE',
-    appId: '1:321715039959:ios:ddf982f510ff3d9e65ca92',
-    messagingSenderId: '321715039959',
-    projectId: 'newchocsaray',
-    storageBucket: 'newchocsaray.appspot.com',
-    iosBundleId: 'com.komai.chocsarayi',
+    apiKey: 'AIzaSyDIT-X4nYeT7wHjZF6udBADY0TMGVoORFM',
+    appId: '1:203935841714:ios:b74ac963b87f4b2bbc38ab',
+    messagingSenderId: '203935841714',
+    projectId: 'choc-a04a0',
+    storageBucket: 'choc-a04a0.appspot.com',
+    iosBundleId: 'com.komai.chocolatesaray',
   );
 }

@@ -69,13 +69,6 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         codeAutoRetrievalTimeout: print);
 
-    Future.delayed(const Duration(seconds: 70), () async {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (_) =>
-                  EntercodeScreen("889989", "jhhjh", "jkjkj", "hjh")));
-    });
     throw "";
   }
 
